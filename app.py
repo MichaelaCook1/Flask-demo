@@ -1,20 +1,15 @@
-from flask import Flask # Import Flask class
-from flask_sqlalchemy import SQLAlchemy # Import SQLAlchemy class
+from flask import Flask, render_template
 
-app = Flask(__name__) # create Flask object
+app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@35.246.12.217/testdb'# Set the connection string to connect to the database
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
-db = SQLAlchemy(app) # create SQLALchemy object
+@app.route('/ben')
+def ben():
+    return render_template('ben.html')
 
+@app.route('/harry')
+def harry():
+    return render_template('harry.html')
 
-
-
-class Users(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(30), nullable=False)
-    last_name = db.Column(db.String(30), nullable=False)
-
-if __name__=='__main__':
-    app.run(debug==True, host='0.0.0.0')
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", debug=True)
     
